@@ -1,12 +1,12 @@
 <header class="header-6">
     <div class="branding">
-        <a [routerLink]="['/home']" class="nav-link">
+        <a [routerLink]="['home']" class="nav-link">
             <clr-icon shape="vm-bug"></clr-icon>
             <span class="title">SmartBuilding</span>
         </a>
     </div>
     <div class="header-nav">
-        <a class="nav-link nav-icon" [routerLink]="['/users']" [routerLinkActive]="['active']">
+        <a class="nav-link nav-icon" [routerLink]="['users']" [routerLinkActive]="['active']">
             <clr-icon shape="user"></clr-icon>
         </a>
         <a class="nav-link nav-icon">
@@ -25,7 +25,7 @@
                     <clr-icon shape="caret" class="icon-orient-down"></clr-icon>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item">Profil</a>
+                    <a class="dropdown-item" [routerLink]="['profil']">Profil</a>
                     <a class="dropdown-item">Réglages</a>
                     <a class="dropdown-item" [routerLink]="['/login']">Déconnexion</a>
                 </div>

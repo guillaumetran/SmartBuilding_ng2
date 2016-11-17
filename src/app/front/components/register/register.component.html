@@ -2,6 +2,7 @@
     <form class="login">
         <label class="title">
              SmartBuilding<span class="trademark">&#8482;</span>
+            Inscription
         </label>
         <div class="login-group">
             <div class="auth-source select">
@@ -12,17 +13,8 @@
             </div>
             <input class="username" type="text" id="login_username" placeholder="Adresse email">
             <input class="password" type="password" id="login_password" placeholder="Mot de passe">
-            <div class="checkbox">
-                <input type="checkbox" id="rememberme">
-                <label for="rememberme">
-                    Se souvenir de moi
-                </label>
-            </div>
-            <div class="error active">
-                Adresse où mot de passe invalide
-            </div>
-            <button type="submit" class="btn btn-primary">Connexion</button>
-            <a class="signup">Créer un compte</a>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <a class="signup" [routerLink]="['/login']">Se connecter</a>
         </div>
     </form>
 </div>

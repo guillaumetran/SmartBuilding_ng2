@@ -1,13 +1,13 @@
 <nav class="sidenav">
     <section class="sidenav-content">
-        <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']">
             Dashboard
         </a>
         <section class="nav-group collapsible">
             <input id="ressourceshumaine" type="checkbox">
             <label for="ressourceshumaine">Ressources humaines</label>
             <ul class="nav-list">
-                <li><a class="nav-link">Gestion des utilisateurs</a></li>
+                <li><a class="nav-link" [routerLink]="['about']" [routerLinkActive]="['active']">Gestion des utilisateurs</a></li>
                 <li><a class="nav-link">Ajouter un utilisateur</a></li>
                 <li><a class="nav-link">Gestion des groupes</a></li>
                 <li><a class="nav-link">Ajouter un groupe</a></li>

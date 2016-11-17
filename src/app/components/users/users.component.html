@@ -1,0 +1,19 @@
+<h1>Utilisateurs</h1>
+<clr-datagrid *ngIf="UserList">
+    <clr-dg-column>ID</clr-dg-column>
+    <clr-dg-column>Photo</clr-dg-column>
+    <clr-dg-column>Nom</clr-dg-column>
+    <clr-dg-column>Prénom</clr-dg-column>
+    <clr-dg-column>Operation</clr-dg-column>
+    <clr-dg-row *clrDgItems="let user of UserList">
+        <clr-dg-cell>{{user.ObjectID}}</clr-dg-cell>
+        <clr-dg-cell><img src="{{user.ProfilPhoto}}" style="width: 50px; height: 50px;"></clr-dg-cell>
+        <clr-dg-cell>{{user.FirstName}}</clr-dg-cell>
+        <clr-dg-cell>{{user.LastName}}</clr-dg-cell>
+        <clr-dg-cell><button class="btn btn-outline">Voir</button></clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer></clr-dg-footer>
+</clr-datagrid>
+<span *ngIf="!UserList" class="spinner spinner-md">
+    Chargement...
+</span>

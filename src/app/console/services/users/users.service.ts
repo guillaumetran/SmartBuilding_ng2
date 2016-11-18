@@ -15,6 +15,12 @@ export class UsersService {
       .catch(this.handleError);
   }
 
+  getUser(id: string): Observable<User> {
+      return this.http.get(this.url + id)
+          .map(this.extractData)
+          .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     return res.json() || { };
   }

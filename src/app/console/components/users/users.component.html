@@ -10,10 +10,17 @@
         <clr-dg-cell><img src="{{user.ProfilPhoto}}" style="width: 50px; height: 50px;"></clr-dg-cell>
         <clr-dg-cell>{{user.FirstName}}</clr-dg-cell>
         <clr-dg-cell>{{user.LastName}}</clr-dg-cell>
-        <clr-dg-cell><button class="btn btn-outline">Voir</button></clr-dg-cell>
+        <clr-dg-cell><button (click)="viewUser(user.ObjectID)" class="btn btn-outline">Voir</button></clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer></clr-dg-footer>
 </clr-datagrid>
 <span *ngIf="!UserList && !errorMessage" class="spinner spinner-md">
     Chargement...
 </span>
+<clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
+    <span class="alert-item">
+      <span class="alert-text">
+          {{errorMessage}}
+      </span>
+    </span>
+</clr-alert>

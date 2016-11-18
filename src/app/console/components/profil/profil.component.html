@@ -1,14 +1,17 @@
 <div class="card">
-    <div class="card-block">
+    <span *ngIf="!user && !errorMessage" class="spinner spinner-md">
+        Chargement...
+    </span>
+    <div class="card-block" *ngIf="user">
         <div class="card-media-block wrap">
-            <img class="card-media-image" src="http://placehold.it/60x60" />
+            <img class="card-media-image" src="{{user.ProfilPhoto}}" />
             <div class="card-media-description">
-                <span class="card-media-title">Guillaume</span>
-                <span class="card-media-text">Tran</span>
+                <span class="card-media-title">{{user.FirstName}}</span>
+                <span class="card-media-text">{{user.LastName}}</span>
             </div>
         </div>
         <p class="card-text">
-            ...
+            {{user.ObjectID}}
         </p>
     </div>
     <div class="card-footer">
@@ -16,3 +19,10 @@
         <a class="card-link">Supprimer</a>
     </div>
 </div>
+<clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
+    <span class="alert-item">
+      <span class="alert-text">
+          {{errorMessage}}
+      </span>
+    </span>
+</clr-alert>

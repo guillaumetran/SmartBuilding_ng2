@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {UsersService} from "../../services/users/users.service";
+import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -12,7 +13,7 @@ export class UsersComponent implements OnInit {
   UserList: User[];
   errorMessage: string;
 
-  constructor(private userService: UsersService) {
+  constructor(private userService: UsersService, private router: Router) {
   }
 
   ngOnInit() {
@@ -28,5 +29,9 @@ export class UsersComponent implements OnInit {
         },
         error => this.errorMessage = <any> error
       );
+  }
+
+  viewUser(user: User) {
+      this.router.navigate(['/profil', user]);
   }
 }

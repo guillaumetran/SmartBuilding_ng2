@@ -7,14 +7,14 @@ import {AboutComponent} from "./components/about/about.component";
 
 const frontRoutes: Routes = [
     {
-        path: 'console',
+        path: '',
         component: ConsoleComponent,
         children: [
             {path: '', redirectTo: 'home', pathMatch: 'full'},
             {path: 'home', component: HomeComponent},
             {path: 'users', component: UsersComponent},
             {path: 'about', component: AboutComponent},
-            {path: 'profil', component: ProfilComponent}
+            {path: 'profil/:id', component: ProfilComponent}
         ]
     }
 ];

@@ -1,11 +1,11 @@
 import {Routes, RouterModule} from "@angular/router";
 import {FrontComponent} from "./front.component";
-import {LoginComponent} from "./components/login/login.component";
-import {RegisterComponent} from "./components/register/register.component";
+import {LoginComponent} from "../login/login.component";
+import {RegisterComponent} from "../register/register.component";
 
 const frontRoutes: Routes = [
     {
-        path: '',
+        path: 'login',
         component: FrontComponent,
         children: [
             {path: '', redirectTo: 'login', pathMatch: 'full'},

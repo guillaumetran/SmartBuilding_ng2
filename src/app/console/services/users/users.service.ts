@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class UsersService {
-  private url = "http://localhost:54871/api/User/";
+  private url = "http://localhost:54649/api/User/";
 
   constructor(private http: Http) { }
 

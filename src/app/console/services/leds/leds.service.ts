@@ -5,7 +5,7 @@ import {Led} from "../../models/led";
 
 @Injectable()
 export class LedsService {
-  private url = "http://localhost:54871/api/Led/";
+  private url = "http://localhost:54649/api/Led/";
 
   constructor(private http: Http) { }
 

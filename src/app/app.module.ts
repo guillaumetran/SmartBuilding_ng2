@@ -8,11 +8,13 @@ import {AppRouting} from "./app.routing";
 import {ConsoleModule} from "./console/console.module";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
+        FormsModule,
         ClarityModule,
         ConsoleModule,
         AppRouting,

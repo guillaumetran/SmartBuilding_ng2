@@ -10,11 +10,15 @@ import {UsersComponent} from "./components/users/users.component";
 import {UsersService} from "./services/users/users.service";
 import {AboutComponent} from "./components/about/about.component";
 import {ClarityModule} from "clarity-angular";
+import {LedsComponent} from "./components/leds/leds.component";
+import {LedsService} from "./services/leds/leds.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         CommonModule,
         ClarityModule,
+        FormsModule,
         ConsoleRouting
     ],
     declarations: [
@@ -24,10 +28,12 @@ import {ClarityModule} from "clarity-angular";
         SidenavComponent,
         HomeComponent,
         UsersComponent,
-        AboutComponent
+        AboutComponent,
+        LedsComponent
     ],
     providers: [
-        UsersService
+        UsersService,
+        LedsService
     ]
 })
 export class ConsoleModule { }

@@ -13,6 +13,7 @@ import {ClarityModule} from "clarity-angular";
 import {LedsComponent} from "./components/leds/leds.component";
 import {LedsService} from "./services/leds/leds.service";
 import {FormsModule} from "@angular/forms";
+import {LedComponent} from "./components/led/led.component";
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {FormsModule} from "@angular/forms";
         HomeComponent,
         UsersComponent,
         AboutComponent,
-        LedsComponent
+        LedsComponent,
+        LedComponent
     ],
     providers: [
         UsersService,

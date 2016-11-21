@@ -1,0 +1,77 @@
+<div *ngIf="!editLed">
+    <h1>LED</h1>
+    <p>ID: {{led.LedId}}</p>
+    <p>Nom: {{led.LedName}}</p>
+    <p>Controleur: {{led.Controleur}}</p>
+    <p>Lat: {{led.Latitude}}</p>
+    <p>Long: {{led.Longitude}}</p>
+    <p>R: {{led.Rgpio}}</p>
+    <p>G: {{led.Ggpio}}</p>
+    <p>B: {{led.Bgpio}}</p>
+    <br/>
+    <button type="button" class="btn btn-outline" (click)="editMode()">Modifier la led</button>
+</div>
+
+<div *ngIf="editLed">
+    <h1>Edit LED</h1>
+    <form class="compact">
+        <section class="form-block">
+            <div class="form-group">
+                <label>Nom de la LED</label>
+                <input type="text" placeholder="Nom de la led" size="35" [(ngModel)]="led.LedName" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label>Latitude</label>
+                <input type="text"placeholder="Latitude" size="35" [(ngModel)]="led.Latitude" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label>Longitude</label>
+                <input type="text" placeholder="Longitude" size="35" [(ngModel)]="led.Longitude" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label>Controleur</label>
+                <input type="text" placeholder="Controleur" size="35" [(ngModel)]="led.Controleur" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label>GPIO</label>
+                <label>R: </label>
+                <div class="select">
+                    <select [(ngModel)]="led.Rgpio" [ngModelOptions]="{standalone: true}">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <label>G: </label>
+                <div class="select">
+                    <select [(ngModel)]="led.Ggpio" [ngModelOptions]="{standalone: true}">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <label>B: </label>
+                <div class="select">
+                    <select [(ngModel)]="led.Bgpio" [ngModelOptions]="{standalone: true}">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        <button type="button" class="btn btn-danger-outline" (click)="editMode()">Annuler</button>
+        <button type="submit" class="btn btn-outline" (click)="updateLed(led.LedId)">Valider</button>
+    </form>
+</div>
+
+<clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
+    <span class="alert-item">
+      <span class="alert-text">
+          {{errorMessage}}
+      </span>
+    </span>
+</clr-alert>

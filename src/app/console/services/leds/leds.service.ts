@@ -21,6 +21,12 @@ export class LedsService {
           .catch(this.handleError);
   }
 
+  updateLed(id: number, led: Led): Observable<Led> {
+      return this.http.put(this.url + id, led)
+          .map(this.extractData)
+          .catch(this.handleError)
+  }
+
   getLeds(): Observable<Led[]> {
     return this.http.get(this.url)
       .map(this.extractData)
@@ -40,6 +46,7 @@ export class LedsService {
   private handleError (error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
+      console.log(error);
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);

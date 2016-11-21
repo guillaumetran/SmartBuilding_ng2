@@ -5,6 +5,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {UsersComponent} from "./components/users/users.component";
 import {AboutComponent} from "./components/about/about.component";
 import {LedsComponent} from "./components/leds/leds.component";
+import {LedComponent} from "./components/led/led.component";
 
 const frontRoutes: Routes = [
     {
@@ -16,7 +17,8 @@ const frontRoutes: Routes = [
             {path: 'users', component: UsersComponent},
             {path: 'about', component: AboutComponent},
             {path: 'profil/:id', component: ProfilComponent},
-            {path: 'leds', component: LedsComponent}
+            {path: 'leds', component: LedsComponent},
+            {path: 'led/:id', component: LedComponent},
         ]
     }
 ];

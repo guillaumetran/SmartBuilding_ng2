@@ -16,7 +16,7 @@
         <clr-dg-cell>{{led.Controleur}}</clr-dg-cell>
         <clr-dg-cell>R: {{led.Rgpio}} G: {{led.Ggpio}} B: {{led.Bgpio}}</clr-dg-cell>
         <clr-dg-cell>
-            <button class="btn btn-outline">Voir</button>
+            <button [routerLink]="['/led', led.LedId]" class="btn btn-outline">Voir</button>
             <button class="btn btn-danger-outline" (click)="removeLed(led.LedId)">Supprimer</button>
         </clr-dg-cell>
     </clr-dg-row>

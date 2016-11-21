@@ -11,5 +11,18 @@ import { Component } from "@angular/core";
   templateUrl: 'home.component.html',
 })
 export class HomeComponent {
+    ledname = "Test";
+    show: boolean
+    constructor (){
+        this.ledname = "test";
+        this.show = false;
+    }
 
+    validate() {
+        this.show = false;
+    }
+
+    edit(){
+        this.show = true;
+    }
 }

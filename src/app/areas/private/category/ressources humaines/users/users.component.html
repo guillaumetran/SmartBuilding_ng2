@@ -1,0 +1,38 @@
+<h1>Utilisateurs</h1>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="card clickable">
+    <div class="card-header">
+    </div>
+    <div class="card-block">
+      <clr-datagrid *ngIf="UserList">
+        <clr-dg-column>ID</clr-dg-column>
+        <clr-dg-column>Photo</clr-dg-column>
+        <clr-dg-column>Nom</clr-dg-column>
+        <clr-dg-column>Prénom</clr-dg-column>
+        <clr-dg-column>Operation</clr-dg-column>
+        <clr-dg-row *clrDgItems="let user of UserList">
+          <clr-dg-cell>{{user.ObjectID}}</clr-dg-cell>
+          <clr-dg-cell><img src="{{user.ProfilPhoto}}" style="width: 50px; height: 50px;"></clr-dg-cell>
+          <clr-dg-cell>{{user.FirstName}}</clr-dg-cell>
+          <clr-dg-cell>{{user.LastName}}</clr-dg-cell>
+          <clr-dg-cell><button (click)="viewUser(user.ObjectID)" class="btn btn-outline">Voir</button></clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer></clr-dg-footer>
+      </clr-datagrid>
+      <span *ngIf="!UserList && !errorMessage" class="spinner spinner-md">
+        Chargement...
+      </span>
+      <clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
+        <span class="alert-item">
+          <span class="alert-text">
+              {{errorMessage}}
+          </span>
+        </span>
+      </clr-alert>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-primary">Action</a>
+    </div>
+  </div>
+</div>
+

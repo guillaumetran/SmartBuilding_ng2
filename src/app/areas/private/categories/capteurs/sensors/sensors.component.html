@@ -1,11 +1,11 @@
-<h1>LEDs</h1>
-<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+<h1>Sensors</h1>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="card">
     <div class="card-header">
-      <button class="btn btn-success-outline" (click)="add = true">Ajouter une led</button>
+      <button class="btn btn-success-outline">Ajouter un capteur</button>
     </div>
     <div class="card-block">
-      <span *ngIf="!LedList && !errorMessage" class="spinner spinner-md">
+      <span *ngIf="!SensorList && !errorMessage" class="spinner spinner-md">
           Chargement...
       </span>
       <clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
@@ -15,24 +15,20 @@
           </span>
         </span>
       </clr-alert>
-      <clr-datagrid *ngIf="LedList">
-        <clr-dg-column>ID</clr-dg-column>
+      <clr-datagrid *ngIf="SensorList">
+        <clr-dg-column>MAC</clr-dg-column>
         <clr-dg-column>Nom</clr-dg-column>
-        <clr-dg-column>Latitude</clr-dg-column>
-        <clr-dg-column>Longitude</clr-dg-column>
-        <clr-dg-column>Controleur</clr-dg-column>
-        <clr-dg-column>GPIO</clr-dg-column>
-        <clr-dg-column>Opérations</clr-dg-column>
-        <clr-dg-row *clrDgItems="let led of LedList">
-          <clr-dg-cell>{{led.LedId}}</clr-dg-cell>
-          <clr-dg-cell>{{led.LedName}}</clr-dg-cell>
-          <clr-dg-cell>{{led.Latitude}}</clr-dg-cell>
-          <clr-dg-cell>{{led.Longitude}}</clr-dg-cell>
-          <clr-dg-cell>{{led.Controleur}}</clr-dg-cell>
-          <clr-dg-cell>R: {{led.Rgpio}} G: {{led.Ggpio}} B: {{led.Bgpio}}</clr-dg-cell>
+        <clr-dg-column>Type</clr-dg-column>
+        <clr-dg-column>Salle</clr-dg-column>
+        <clr-dg-column></clr-dg-column>
+        <clr-dg-row *clrDgItems="let sensor of SensorList">
+          <clr-dg-cell>{{sensor.MAC}}</clr-dg-cell>
+          <clr-dg-cell>{{sensor.SensorName}}</clr-dg-cell>
+          <clr-dg-cell>{{sensor.SensorType}}</clr-dg-cell>
+          <clr-dg-cell>{{sensor.RoomName}}</clr-dg-cell>
           <clr-dg-cell>
-            <button [routerLink]="['/led', led.LedId]" class="btn btn-outline">Voir</button>
-            <button class="btn btn-danger-outline" (click)="removeLed(led.LedId)">Supprimer</button>
+            <button class="btn btn-outline">Voir</button>
+            <button class="btn btn-danger-outline">Supprimer</button>
           </clr-dg-cell>
         </clr-dg-row>
         <clr-dg-footer></clr-dg-footer>
@@ -44,7 +40,7 @@
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="add">
+<!--<clr-modal [(clrModalOpen)]="add">
     <h3 class="modal-title">Ajouter une LED</h3>
     <div class="modal-body">
         <form class="compact">
@@ -102,4 +98,4 @@
         <button type="button" class="btn btn-outline" (click)="add = false; resetLedAdd()">Annuler</button>
         <button type="button" class="btn btn-primary" (click)="add = false; addLed()">Ok</button>
     </div>
-</clr-modal>
+</clr-modal>-->

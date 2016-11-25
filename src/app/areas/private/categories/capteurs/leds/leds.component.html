@@ -1,0 +1,181 @@
+<h1>LEDs</h1>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="card">
+    <div class="card-header">
+      <button class="btn btn-success-outline" (click)="add = true">Ajouter une led</button>
+    </div>
+    <div class="card-block">
+      <span *ngIf="!LedList && !errorMessage" class="spinner spinner-md">
+          Chargement...
+      </span>
+      <clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
+        <span class="alert-item">
+          <span class="alert-text">
+              {{errorMessage}}
+          </span>
+        </span>
+      </clr-alert>
+      <clr-datagrid *ngIf="LedList">
+        <clr-dg-column>ID</clr-dg-column>
+        <clr-dg-column>Nom</clr-dg-column>
+        <clr-dg-column>Latitude</clr-dg-column>
+        <clr-dg-column>Longitude</clr-dg-column>
+        <clr-dg-column>Controleur</clr-dg-column>
+        <clr-dg-column>GPIO</clr-dg-column>
+        <clr-dg-column>Opérations</clr-dg-column>
+        <clr-dg-row *clrDgItems="let led of LedList; let i = index">
+          <clr-dg-cell>{{led.LedId}}</clr-dg-cell>
+          <clr-dg-cell>{{led.LedName}}</clr-dg-cell>
+          <clr-dg-cell>{{led.Latitude}}</clr-dg-cell>
+          <clr-dg-cell>{{led.Longitude}}</clr-dg-cell>
+          <clr-dg-cell>{{led.Controleur}}</clr-dg-cell>
+          <clr-dg-cell>R: {{led.Rgpio}} G: {{led.Ggpio}} B: {{led.Bgpio}}</clr-dg-cell>
+          <clr-dg-cell>
+            <button class="btn btn-outline" (click)="see = true; selectLed(i);">Voir</button>
+            <button class="btn btn-danger-outline" (click)="removeLed(led.LedId)">Supprimer</button>
+          </clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          <clr-dg-pagination #pagination [clrDgPageSize]="getPagination()"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-primary">Action</a>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="see" [clrModalSize]="'lg'" *ngIf="LedList">
+  <div class="modal-body">
+    <clr-tabs>
+      <clr-tab-link>Infos</clr-tab-link>
+      <clr-tab-link>Modifier</clr-tab-link>
+      <clr-tab-content>
+        <p>ID: {{LedList[selectedLed].LedId}}</p>
+        <p>Nom: {{LedList[selectedLed].LedName}}</p>
+        <p>Controleur: {{LedList[selectedLed].Controleur}}</p>
+        <p>Lat: {{LedList[selectedLed].Latitude}}</p>
+        <p>Long: {{LedList[selectedLed].Longitude}}</p>
+        <p>R: {{LedList[selectedLed].Rgpio}}</p>
+        <p>G: {{LedList[selectedLed].Ggpio}}</p>
+        <p>B: {{LedList[selectedLed].Bgpio}}</p>
+      </clr-tab-content>
+      <clr-tab-content>
+          <section class="form-block">
+            <div class="form-group">
+              <label>Nom de la LED</label>
+              <input type="text" placeholder="Nom de la led" size="35" [(ngModel)]="LedList[selectedLed].LedId" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>Latitude</label>
+              <input type="text"placeholder="Latitude" size="35" [(ngModel)]="LedList[selectedLed].Latitude" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>Longitude</label>
+              <input type="text" placeholder="Longitude" size="35" [(ngModel)]="LedList[selectedLed].Longitude" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>Controleur</label>
+              <input type="text" placeholder="Controleur" size="35" [(ngModel)]="LedList[selectedLed].Controleur" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>GPIO</label>
+              <label>R: </label>
+              <div class="select">
+                <select [(ngModel)]="LedList[selectedLed].Rgpio" [ngModelOptions]="{standalone: true}">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </div>
+              <label>G: </label>
+              <div class="select">
+                <select [(ngModel)]="LedList[selectedLed].Ggpio" [ngModelOptions]="{standalone: true}">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </div>
+              <label>B: </label>
+              <div class="select">
+                <select [(ngModel)]="LedList[selectedLed].Bgpio" [ngModelOptions]="{standalone: true}">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </div>
+            </div>
+          </section>
+      </clr-tab-content>
+    </clr-tabs>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="see = false;">Annuler</button>
+    <button type="button" class="btn btn-primary" (click)="see = false">Valider</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="add">
+  <h3 class="modal-title">Ajouter une LED</h3>
+  <div class="modal-body">
+    <form class="compact">
+      <section class="form-block">
+        <div class="form-group">
+          <label>Nom de la LED</label>
+          <input type="text" placeholder="Nom de la led" size="35" [(ngModel)]="LedAdd.LedName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Latitude</label>
+          <input type="text"placeholder="Latitude" size="35" [(ngModel)]="LedAdd.Latitude" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Longitude</label>
+          <input type="text" placeholder="Longitude" size="35" [(ngModel)]="LedAdd.Longitude" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Controleur</label>
+          <input type="text" placeholder="Controleur" size="35" [(ngModel)]="LedAdd.Controleur" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>GPIO</label>
+          <label>R: </label>
+          <div class="select">
+            <select [(ngModel)]="LedAdd.Rgpio" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <label>G: </label>
+          <div class="select">
+            <select [(ngModel)]="LedAdd.Ggpio" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <label>B: </label>
+          <div class="select">
+            <select [(ngModel)]="LedAdd.Bgpio" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="add = false; resetLedAdd()">Annuler</button>
+    <button type="button" class="btn btn-primary" (click)="add = false; addLed()">Ok</button>
+  </div>
+</clr-modal>

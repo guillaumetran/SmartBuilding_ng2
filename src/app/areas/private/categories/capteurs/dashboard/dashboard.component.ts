@@ -30,4 +30,11 @@ export class DashboardComponent implements OnInit {
         error => this.errorMessage = <any> error
       );
   }
+
+  getPagination(): number {
+    if (this.AlertList.length < 10){
+      return this.AlertList.length
+    }
+    else return 10
+  }
 }

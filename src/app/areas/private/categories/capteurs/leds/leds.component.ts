@@ -9,6 +9,7 @@ import {LedsService} from "../../../shared/services/leds.service";
 export class LedsComponent implements OnInit {
     LedList: Led[];
     LedAdd: Led;
+    selectedLed = 0;
     errorMessage: string;
 
   constructor(private ledService: LedsService) {
@@ -38,6 +39,10 @@ export class LedsComponent implements OnInit {
       }
   }
 
+  selectLed(id: number) {
+    this.selectedLed = id;
+    console.log(this.selectedLed);
+  }
   getLeds() {
     this.ledService.getLeds()
       .subscribe(
@@ -62,5 +67,12 @@ export class LedsComponent implements OnInit {
 
   resetLedAdd(){
       this.LedAdd = new Led();
+  }
+
+  getPagination(): number {
+    if (this.LedList.length < 10){
+      return this.LedList.length
+    }
+    else return 10
   }
 }

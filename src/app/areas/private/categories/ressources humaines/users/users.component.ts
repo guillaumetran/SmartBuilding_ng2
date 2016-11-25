@@ -32,4 +32,11 @@ export class UsersComponent implements OnInit {
   viewUser(user: User) {
       this.router.navigate(['/profil', user]);
   }
+
+  getPagination(): number {
+    if (this.UserList.length < 10){
+      return this.UserList.length
+    }
+    else return 10
+  }
 }

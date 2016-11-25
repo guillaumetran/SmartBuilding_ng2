@@ -1,11 +1,12 @@
 import {Routes, RouterModule} from "@angular/router";
-import {UsersComponent} from "./category/ressources humaines/users/users.component";
+import {UsersComponent} from "./categories/ressources humaines/users/users.component";
 import {PrivateComponent} from "./private.component";
-import {LedsComponent} from "./category/capteurs/leds/leds.component";
+import {LedsComponent} from "./categories/capteurs/leds/leds.component";
 import {UserProfileComponent} from "./pages/user-profile/user-profile.component";
 import {LedProfileComponent} from "./pages/led-profile/led-profile.component";
 import {AuthGuard} from "../../shared/authguard";
-import {DashboardComponent} from "./category/capteurs/dashboard/dashboard.component";
+import {DashboardComponent} from "./categories/capteurs/dashboard/dashboard.component";
+import {SensorsComponent} from "./categories/capteurs/sensors/sensors.component";
 
 const privateRoutes: Routes = [
     {
@@ -20,7 +21,8 @@ const privateRoutes: Routes = [
             {path: 'profil/:id', component: UserProfileComponent},
             {path: 'leds', component: LedsComponent},
             {path: 'led/:id', component: LedProfileComponent},
-        ]
+            {path: 'sensors', component: SensorsComponent},
+      ]
     }
 ];
 

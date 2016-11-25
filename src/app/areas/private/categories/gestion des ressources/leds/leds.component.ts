@@ -3,20 +3,23 @@ import {Led} from "../../../shared/models/led";
 import {LedsService} from "../../../shared/services/leds.service";
 
 @Component({
-    selector: 'private-leds',
+    selector: 'ressources-leds',
     templateUrl: 'leds.component.html',
 })
 export class LedsComponent implements OnInit {
     LedList: Led[];
     LedAdd: Led;
-    selectedLed = 0;
+    LedEdit: Led;
+    editLedIndex: number;
+    removeLedID: number;
     errorMessage: string;
 
-  constructor(private ledService: LedsService) {
+  constructor(private ledsService: LedsService) {
   }
 
   ngOnInit() {
       this.LedAdd = new Led();
+      this.LedEdit = new Led();
       this.getLeds();
   }
 
@@ -24,38 +27,44 @@ export class LedsComponent implements OnInit {
       console.log("add");
       if (this.LedAdd.LedName != null){
           console.log("in");
-          this.ledService.addLed(this.LedAdd)
+          this.ledsService.addLed(this.LedAdd)
               .subscribe(
                   led => {
-                      this.resetLedAdd();
-                      console.log(led);
-                      this.LedList.push(led);
+                    this.LedList.push(led);
+                    this.resetLed();
                   },
                   error => {
                       this.errorMessage = <any> error;
-                      this.resetLedAdd();
+                      this.resetLed();
                   }
               )
       }
   }
 
-  selectLed(id: number) {
-    this.selectedLed = id;
-    console.log(this.selectedLed);
+  updateLed(){
+    this.ledsService.updateLed(this.LedEdit.LedId, this.LedEdit)
+      .subscribe(
+        led => {
+          this.LedList[this.editLedIndex] = this.LedEdit;
+        },
+        error => {
+          this.errorMessage = <any> error;
+        }
+      )
   }
+
   getLeds() {
-    this.ledService.getLeds()
+    this.ledsService.getLeds()
       .subscribe(
         leds => {
           this.LedList = leds;
-          console.log(leds);
         },
         error => this.errorMessage = <any> error
       );
   }
 
   removeLed(id: number){
-      this.ledService.removeLed(id)
+      this.ledsService.removeLed(id)
           .subscribe(
               leds => {
                   let index = this.LedList.indexOf(leds);
@@ -65,8 +74,21 @@ export class LedsComponent implements OnInit {
           );
   }
 
-  resetLedAdd(){
+  resetLed(){
       this.LedAdd = new Led();
+  }
+
+  selectLedEdit(index: number, led: Led) {
+    this.editLedIndex = index;
+    this.LedEdit = new Led();
+    this.LedEdit.LedId = led.LedId;
+    this.LedEdit.LedName = led.LedName;
+    this.LedEdit.Latitude = led.Latitude;
+    this.LedEdit.Longitude = led.Longitude;
+    this.LedEdit.Controleur = led.Controleur;
+    this.LedEdit.Rgpio = led.Rgpio;
+    this.LedEdit.Ggpio = led.Ggpio;
+    this.LedEdit.Bgpio = led.Bgpio;
   }
 
   getPagination(): number {

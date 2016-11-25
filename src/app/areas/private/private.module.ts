@@ -5,16 +5,16 @@ import {UsersService} from "./shared/services/users.service";
 import {SharedModule} from "../../shared/shared.module";
 import {PrivateRouting} from "./private.routing";
 import {PrivateComponent} from "./private.component";
-import {LedsComponent} from "./categories/capteurs/leds/leds.component";
+import {LedsComponent} from "./categories/gestion des ressources/leds/leds.component";
 import {LedsService} from "./shared/services/leds.service";
 import {FormsModule} from "@angular/forms";
-import {LedProfileComponent} from "./pages/led-profile/led-profile.component";
-import {UserProfileComponent} from "./pages/user-profile/user-profile.component";
+import {UserProfileComponent} from "./categories/ressources humaines/user-profile/user-profile.component";
 import {AuthGuard} from "../../shared/authguard";
 import {DashboardComponent} from "./categories/capteurs/dashboard/dashboard.component";
 import {DataSensorService} from "./shared/services/datasensor.service";
 import {SensorsService} from "./shared/services/sensors.service";
-import {SensorsComponent} from "./categories/capteurs/sensors/sensors.component";
+import {SensorsComponent} from "./categories/gestion des ressources/sensors/sensors.component";
+import {RessourcesComponent} from "./categories/gestion des ressources/ressources/ressources.component";
 
 @NgModule({
   imports: [
@@ -28,9 +28,9 @@ import {SensorsComponent} from "./categories/capteurs/sensors/sensors.component"
     UserProfileComponent,
     PrivateComponent,
     LedsComponent,
-    LedProfileComponent,
     DashboardComponent,
-    SensorsComponent
+    SensorsComponent,
+    RessourcesComponent
   ],
   providers: [
     UsersService,

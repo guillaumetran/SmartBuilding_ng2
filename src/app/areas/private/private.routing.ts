@@ -1,27 +1,22 @@
 import {Routes, RouterModule} from "@angular/router";
 import {UsersComponent} from "./categories/ressources humaines/users/users.component";
 import {PrivateComponent} from "./private.component";
-import {LedsComponent} from "./categories/capteurs/leds/leds.component";
-import {UserProfileComponent} from "./pages/user-profile/user-profile.component";
-import {LedProfileComponent} from "./pages/led-profile/led-profile.component";
+import {UserProfileComponent} from "./categories/ressources humaines/user-profile/user-profile.component";
 import {AuthGuard} from "../../shared/authguard";
 import {DashboardComponent} from "./categories/capteurs/dashboard/dashboard.component";
-import {SensorsComponent} from "./categories/capteurs/sensors/sensors.component";
+import {RessourcesComponent} from "./categories/gestion des ressources/ressources/ressources.component";
 
 const privateRoutes: Routes = [
     {
         path: '',
         component: PrivateComponent,
       canActivate: [AuthGuard],
-      //canActivateChild: [AuthGuard],
       children: [
-            {path: '', redirectTo: 'users', pathMatch: 'full'},
+            {path: '', redirectTo: 'ressources', pathMatch: 'full'},
             {path: 'dashboard', component: DashboardComponent},
             {path: 'users', component: UsersComponent},
             {path: 'profil/:id', component: UserProfileComponent},
-            {path: 'leds', component: LedsComponent},
-            {path: 'led/:id', component: LedProfileComponent},
-            {path: 'sensors', component: SensorsComponent},
+            {path: 'ressources', component: RessourcesComponent},
       ]
     }
 ];

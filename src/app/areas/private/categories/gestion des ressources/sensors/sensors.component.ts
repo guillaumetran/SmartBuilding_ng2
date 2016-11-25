@@ -6,7 +6,7 @@ import {Sensor} from "../../../shared/models/sensor";
 import {SensorsService} from "../../../shared/services/sensors.service";
 
 @Component({
-  selector: 'private-sensors',
+  selector: 'ressources-sensors',
   templateUrl: 'sensors.component.html',
 })
 export class SensorsComponent implements OnInit {

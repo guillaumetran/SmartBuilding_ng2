@@ -15,6 +15,8 @@ import {DataSensorService} from "./shared/services/datasensor.service";
 import {SensorsService} from "./shared/services/sensors.service";
 import {SensorsComponent} from "./categories/gestion des ressources/sensors/sensors.component";
 import {RessourcesComponent} from "./categories/gestion des ressources/ressources/ressources.component";
+import {RoomsService} from "./shared/services/rooms.service";
+import {RoomsComponent} from "./categories/gestion des ressources/rooms/rooms.component";
 
 @NgModule({
   imports: [
@@ -30,14 +32,16 @@ import {RessourcesComponent} from "./categories/gestion des ressources/ressource
     LedsComponent,
     DashboardComponent,
     SensorsComponent,
-    RessourcesComponent
+    RessourcesComponent,
+    RoomsComponent
   ],
   providers: [
     UsersService,
     LedsService,
     AuthGuard,
     DataSensorService,
-    SensorsService
+    SensorsService,
+    RoomsService
   ]
 })
 export class PrivateModule { }

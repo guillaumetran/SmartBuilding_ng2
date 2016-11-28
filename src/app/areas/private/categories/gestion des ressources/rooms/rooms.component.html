@@ -1,0 +1,190 @@
+<h1>Rooms</h1>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="card">
+    <div class="card-header">
+      <button class="btn btn-success-outline" (click)="add = true">Ajouter une salle</button>
+    </div>
+    <div class="card-block">
+      <span *ngIf="!RoomList && !errorMessage" class="spinner spinner-md">
+          Chargement...
+      </span>
+      <clr-alert [clrAlertType]="'alert-danger'" *ngIf="errorMessage">
+        <span class="alert-item">
+          <span class="alert-text">
+              {{errorMessage}}
+          </span>
+        </span>
+      </clr-alert>
+      <clr-datagrid *ngIf="RoomList">
+        <clr-dg-column>Nom</clr-dg-column>
+        <clr-dg-column>Etage</clr-dg-column>
+        <clr-dg-column>Effectif</clr-dg-column>
+        <clr-dg-column>Numéro d'accréditation</clr-dg-column>
+        <clr-dg-column>Localisation X</clr-dg-column>
+        <clr-dg-column>Localisation Y</clr-dg-column>
+        <clr-dg-column>Localisation Z</clr-dg-column>
+        <clr-dg-column></clr-dg-column>
+        <clr-dg-row *clrDgItems="let room of RoomList; let i = index">
+          <clr-dg-cell>{{room.RoomName}}</clr-dg-cell>
+          <clr-dg-cell>{{room.Floor}}</clr-dg-cell>
+          <clr-dg-cell>{{room.Effective}}</clr-dg-cell>
+          <clr-dg-cell>{{room.AccreditationNum}}</clr-dg-cell>
+          <clr-dg-cell>{{room.LocalisationX}}</clr-dg-cell>
+          <clr-dg-cell>{{room.LocalisationY}}</clr-dg-cell>
+          <clr-dg-cell>{{room.LocalisationZ}}</clr-dg-cell>
+          <clr-dg-cell>
+            <button class="btn btn-outline" (click)="edit = true; selectRoomEdit(i, room)">Modifier</button>
+            <button class="btn btn-danger-outline" (click)="remove = true; removeRoomID = room.RoomName">Supprimer</button>
+          </clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer>
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          <clr-dg-pagination #pagination [clrDgPageSize]="getPagination()"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-primary">Action</a>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="remove" *ngIf="RoomList">
+  <div class="modal-body">
+    Êtes-vous sur de vouloir supprimer la salle ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="remove = false;">Annuler</button>
+    <button type="button" class="btn btn-primary" (click)="remove = false; removeRoom(removeRoomID)">Confirmer</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="edit" *ngIf="RoomList && editRoomIndex >= 0">
+  <h3 class="modal-title">Modifier une salle</h3>
+  <div class="modal-body">
+    <form class="compact">
+      <section class="form-block">
+        <div class="form-group">
+          <label>Nom de la salle</label>
+          <input type="text" placeholder="Nom de la salle" size="35" [(ngModel)]="RoomEdit.RoomName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Etage</label>
+          <input type="text"placeholder="Etage" size="35" [(ngModel)]="RoomEdit.Floor" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Effectif</label>
+          <input type="text" placeholder="Effectif" size="35" [(ngModel)]="RoomEdit.Effective" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>N° d'accréditation</label>
+          <div class="select">
+            <select [(ngModel)]="RoomEdit.AccreditationNum" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Localisation</label>
+          <label>X: </label>
+          <div class="select">
+            <select [(ngModel)]="RoomEdit.LocalisationX" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <label>Y: </label>
+          <div class="select">
+            <select [(ngModel)]="RoomEdit.LocalisationY" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <label>Z: </label>
+          <div class="select">
+            <select [(ngModel)]="RoomEdit.LocalisationZ" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="edit = false;">Annuler</button>
+    <button type="button" class="btn btn-primary" (click)="edit = false; updateRoom()">Valider</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="add">
+  <h3 class="modal-title">Ajouter une LED</h3>
+  <div class="modal-body">
+    <form class="compact">
+      <section class="form-block">
+        <div class="form-group">
+          <label>Nom de la salle</label>
+          <input type="text" placeholder="Nom de la salle" size="35" [(ngModel)]="RoomAdd.RoomName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Etage</label>
+          <input type="text"placeholder="Etage" size="35" [(ngModel)]="RoomAdd.Floor" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>Effectif</label>
+          <input type="text" placeholder="Effectif" size="35" [(ngModel)]="RoomAdd.Effective" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label>N° d'accréditation</label>
+          <div class="select">
+            <select [(ngModel)]="RoomAdd.AccreditationNum" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Localisation</label>
+          <label>X: </label>
+          <div class="select">
+            <select [(ngModel)]="RoomAdd.LocalisationX" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <label>Y: </label>
+          <div class="select">
+            <select [(ngModel)]="RoomAdd.LocalisationY" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <label>Z: </label>
+          <div class="select">
+            <select [(ngModel)]="RoomAdd.LocalisationZ" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="add = false; resetRoomAdd()">Annuler</button>
+    <button type="button" class="btn btn-primary" (click)="add = false; addRoom()">Ok</button>
+  </div>
+</clr-modal>
